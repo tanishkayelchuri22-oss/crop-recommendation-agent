@@ -269,23 +269,74 @@ if analyze_button:
     st.info(weather["overall"])
 
     # -----------------------------------------
-    # Farming Advice
-    # -----------------------------------------
+# Farming Advice
+# -----------------------------------------
 
-    st.divider()
+st.divider()
 
-    st.subheader("🌱 Farming Advice")
+st.subheader("🌱 Farming Advice")
 
-    farming_advice = result["farming_advice"]
+farming_advice = result["farming_advice"]
 
-    for number, advice_item in enumerate(
-        farming_advice["advice"],
-        start=1
-    ):
 
-        st.write(
-            f"**{number}.** {advice_item}"
-        )
+# -----------------------------------------
+# Crop-Specific Advice
+# -----------------------------------------
+
+st.markdown("### 🌾 Crop-Specific Advice")
+
+for number, advice_item in enumerate(
+    farming_advice["crop_advice"],
+    start=1
+):
+    st.write(
+        f"**{number}.** {advice_item}"
+    )
+
+
+# -----------------------------------------
+# Soil & Nutrient Advice
+# -----------------------------------------
+
+st.markdown("### 🧪 Soil & Nutrient Advice")
+
+for number, advice_item in enumerate(
+    farming_advice["soil_advice"],
+    start=1
+):
+    st.write(
+        f"**{number}.** {advice_item}"
+    )
+
+
+# -----------------------------------------
+# Weather Advice
+# -----------------------------------------
+
+st.markdown("### 🌦️ Weather Advice")
+
+for number, advice_item in enumerate(
+    farming_advice["weather_advice"],
+    start=1
+):
+    st.write(
+        f"**{number}.** {advice_item}"
+    )
+
+
+# -----------------------------------------
+# Conditions to Watch
+# -----------------------------------------
+
+st.markdown("### ⚠️ Conditions to Watch")
+
+for number, warning in enumerate(
+    farming_advice["warnings"],
+    start=1
+):
+    st.write(
+        f"**{number}.** {warning}"
+    )
 
     # -----------------------------------------
     # Input Summary
