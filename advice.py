@@ -9,404 +9,326 @@ def generate_advice(
     rainfall
 ):
     """
-    Generate crop-specific farming advice based on
-    the predicted crop and current farm conditions.
+    Generate structured farming advice based on:
+    - predicted crop
+    - soil nutrients
+    - soil pH
+    - weather conditions
     """
-
-    advice = []
 
     crop_name = str(crop).lower()
 
-    # --------------------------------------------------
-    # Crop-specific advice
-    # --------------------------------------------------
-
     crop_advice = {
-
         "rice": [
-            "Rice generally benefits from adequate water availability "
-            "and consistent soil moisture.",
-            "Maintain proper field water management and avoid prolonged "
-            "water stress during important growth stages."
+            "Maintain adequate soil moisture throughout important growth stages.",
+            "Monitor field water levels and provide proper drainage after heavy rainfall."
         ],
 
         "maize": [
-            "Maize benefits from well-drained soil and adequate moisture "
-            "during germination and grain development.",
-            "Avoid excessive standing water because poor drainage can "
-            "affect maize root development."
+            "Maintain adequate soil moisture during germination and grain development.",
+            "Use well-drained soil and avoid prolonged standing water."
         ],
 
         "wheat": [
-            "Wheat generally performs well under cooler growing conditions "
-            "with controlled irrigation.",
-            "Avoid excessive irrigation, particularly near crop maturity."
+            "Maintain controlled irrigation and avoid excessive soil moisture.",
+            "Monitor the crop carefully during periods of high temperature."
         ],
 
         "cotton": [
-            "Cotton benefits from good sunlight, suitable soil conditions "
-            "and careful moisture management.",
-            "Avoid excessive moisture and monitor the crop regularly "
-            "during humid conditions."
+            "Maintain suitable soil moisture while avoiding prolonged waterlogging.",
+            "Monitor the crop regularly during humid conditions."
         ],
 
         "jute": [
-            "Jute generally prefers warm and humid conditions with "
-            "adequate moisture.",
-            "Maintain sufficient soil moisture while avoiding prolonged "
-            "waterlogging where drainage is poor."
+            "Maintain adequate moisture because jute generally performs well in warm and humid conditions.",
+            "Avoid prolonged waterlogging where drainage is poor."
         ],
 
         "coffee": [
-            "Coffee generally benefits from suitable moisture conditions "
-            "and well-managed soil.",
-            "Good drainage and suitable soil conditions are important "
-            "for healthy coffee growth."
-        ],
-
-        "sugarcane": [
-            "Sugarcane requires substantial water during its growth period "
-            "and benefits from good soil fertility.",
-            "Maintain adequate moisture while avoiding prolonged "
-            "waterlogging."
+            "Maintain suitable soil moisture and good soil management.",
+            "Good drainage is important for healthy coffee growth."
         ],
 
         "banana": [
-            "Banana generally requires regular moisture and good soil fertility.",
-            "Protect the crop from prolonged dry conditions and maintain "
-            "adequate drainage during heavy rainfall."
+            "Maintain regular soil moisture and adequate nutrient availability.",
+            "Ensure good drainage during periods of heavy rainfall."
         ],
 
         "coconut": [
-            "Coconut benefits from adequate moisture and well-drained soil.",
-            "Maintain soil moisture during dry periods and monitor drainage "
-            "during heavy rainfall."
+            "Maintain adequate soil moisture during dry periods.",
+            "Ensure good drainage during periods of heavy rainfall."
         ],
 
         "chickpea": [
-            "Chickpea generally performs well with moderate moisture "
-            "and good drainage.",
-            "Avoid excessive irrigation because waterlogging can affect "
-            "chickpea growth."
+            "Maintain moderate soil moisture and good drainage.",
+            "Avoid excessive irrigation and prolonged waterlogging."
         ],
 
         "kidneybeans": [
-            "Kidney beans benefit from well-drained soil and moderate moisture.",
-            "Avoid excessive rainfall or irrigation that may cause "
-            "waterlogging."
+            "Maintain moderate soil moisture and good drainage.",
+            "Avoid excessive irrigation and waterlogged soil."
         ],
 
         "lentil": [
-            "Lentil generally prefers moderate moisture and good drainage.",
-            "Avoid excessive irrigation and prolonged wet soil conditions."
+            "Maintain moderate moisture and good soil drainage.",
+            "Avoid excessive irrigation during the growing period."
         ],
 
         "blackgram": [
-            "Blackgram generally benefits from moderate moisture and "
-            "well-drained soil.",
-            "Avoid prolonged waterlogging and monitor the crop during "
-            "high-humidity conditions."
+            "Maintain moderate soil moisture and good drainage.",
+            "Monitor the crop carefully during periods of high humidity."
         ],
 
         "mungbean": [
-            "Mungbean generally performs well with moderate moisture "
-            "and good drainage.",
-            "Avoid excessive irrigation and monitor moisture during "
-            "hot weather."
+            "Maintain moderate moisture and avoid excessive irrigation.",
+            "Monitor soil moisture carefully during hot conditions."
         ],
 
         "mothbeans": [
-            "Mothbeans are relatively suited to warm and comparatively "
-            "dry conditions.",
-            "Avoid excessive irrigation and monitor soil moisture carefully."
+            "Avoid excessive irrigation and monitor soil moisture carefully.",
+            "Good drainage is important for healthy crop development."
         ],
 
         "pigeonpeas": [
-            "Pigeonpea generally benefits from good drainage and moderate "
-            "soil moisture.",
-            "Avoid prolonged waterlogging, particularly during periods "
-            "of heavy rainfall."
-        ],
-
-        "groundnut": [
-            "Groundnut benefits from well-drained soil and appropriate "
-            "moisture during pod development.",
-            "Avoid prolonged waterlogging because it can affect root and "
-            "pod development."
-        ],
-
-        "soybean": [
-            "Soybean generally benefits from adequate moisture and "
-            "well-drained soil.",
-            "Monitor drainage during heavy rainfall and avoid prolonged "
-            "waterlogging."
+            "Maintain moderate soil moisture and good drainage.",
+            "Avoid prolonged waterlogging during heavy rainfall."
         ],
 
         "grapes": [
-            "Grapes benefit from good drainage and careful irrigation management.",
-            "Avoid excessive moisture around the roots and monitor humidity "
-            "during wet conditions."
+            "Use careful irrigation management and maintain good drainage.",
+            "Avoid excessive moisture around the root zone."
         ],
 
         "apple": [
-            "Apple generally benefits from suitable temperature conditions "
-            "and well-drained soil.",
-            "Monitor temperature and moisture conditions carefully because "
-            "extreme conditions can affect fruit development."
+            "Monitor temperature and moisture conditions during crop development.",
+            "Maintain suitable soil drainage."
         ],
 
         "mango": [
-            "Mango benefits from good drainage and suitable moisture management.",
-            "Avoid excessive irrigation and monitor the crop during periods "
-            "of heavy rainfall."
+            "Maintain appropriate irrigation and good soil drainage.",
+            "Avoid excessive irrigation during wet conditions."
         ],
 
         "orange": [
-            "Orange generally benefits from well-drained soil and consistent "
-            "moisture management.",
-            "Avoid both prolonged drought and excessive water around the roots."
+            "Maintain consistent soil moisture without excessive irrigation.",
+            "Ensure good drainage around the root zone."
         ],
 
         "papaya": [
-            "Papaya requires good drainage and adequate moisture.",
-            "Avoid waterlogging because excessive soil moisture can damage "
-            "the root system."
+            "Maintain adequate moisture while ensuring excellent drainage.",
+            "Avoid prolonged waterlogging around the root system."
         ],
 
         "pomegranate": [
-            "Pomegranate generally benefits from well-drained soil and "
-            "controlled irrigation.",
-            "Avoid excessive moisture and maintain appropriate irrigation "
-            "during fruit development."
+            "Use controlled irrigation and maintain well-drained soil.",
+            "Avoid excessive moisture around the root zone."
         ],
 
         "watermelon": [
-            "Watermelon benefits from warm conditions and adequate moisture "
-            "during early growth and fruit development.",
-            "Avoid excessive waterlogging and maintain good field drainage."
+            "Maintain adequate moisture during early growth and fruit development.",
+            "Avoid waterlogging and maintain good field drainage."
         ],
 
         "muskmelon": [
-            "Muskmelon generally benefits from warm conditions and controlled "
-            "irrigation.",
-            "Avoid excessive moisture because good drainage is important "
-            "for healthy root development."
+            "Maintain controlled irrigation during crop development.",
+            "Avoid excessive moisture and maintain good drainage."
         ]
     }
 
-    if crop_name in crop_advice:
-        advice.extend(crop_advice[crop_name])
-    else:
-        advice.append(
-            f"The model recommends {crop_name}. "
-            "Check local agronomic recommendations before cultivation."
-        )
+    # ==================================================
+    # CROP-SPECIFIC ADVICE
+    # ==================================================
 
-    # --------------------------------------------------
-    # Crop-specific condition checks
-    # --------------------------------------------------
+    crop_messages = crop_advice.get(
+        crop_name,
+        [
+            f"The model recommends {crop_name}.",
+            "Follow local agronomic recommendations and monitor crop conditions regularly."
+        ]
+    )
 
-    if crop_name == "rice" and rainfall < 50:
-        advice.append(
-            "For the predicted rice crop, rainfall is relatively low. "
-            "Monitor field moisture and irrigation requirements carefully."
-        )
+    # ==================================================
+    # SOIL & NUTRIENT ADVICE
+    # ==================================================
 
-    if crop_name == "rice" and rainfall > 200:
-        advice.append(
-            "For the predicted rice crop, rainfall is relatively high. "
-            "Monitor drainage and avoid uncontrolled water accumulation."
-        )
-
-    if crop_name in ["wheat", "chickpea", "lentil"] and temperature > 30:
-        advice.append(
-            f"The predicted {crop_name} may experience stress under "
-            "the current high-temperature condition. Monitor the crop closely."
-        )
-
-    if crop_name in ["maize", "cotton", "sugarcane"] and temperature > 30:
-        advice.append(
-            f"The predicted {crop_name} is experiencing a relatively "
-            "high temperature condition. Pay attention to soil moisture."
-        )
-
-    if crop_name in ["coffee", "jute"] and humidity > 80:
-        advice.append(
-            f"Humidity is high for the predicted {crop_name}. "
-            "Monitor the crop and surrounding field for moisture-related problems."
-        )
-
-    if crop_name in [
-        "chickpea",
-        "lentil",
-        "blackgram",
-        "mungbean",
-        "mothbeans",
-        "kidneybeans"
-    ] and rainfall > 200:
-        advice.append(
-            f"Rainfall is high for the predicted {crop_name}. "
-            "Good drainage is especially important."
-        )
-
-    # --------------------------------------------------
-    # Nitrogen advice
-    # --------------------------------------------------
+    soil_messages = []
 
     if N < 40:
-        advice.append(
-            "Nitrogen is relatively low. Consider soil testing and "
-            "appropriate nutrient management before applying fertilizer."
+        soil_messages.append(
+            "Nitrogen is relatively low. Consider soil testing and appropriate nutrient management."
         )
-
     elif N > 100:
-        advice.append(
-            "Nitrogen is relatively high. Avoid unnecessary nitrogen "
-            "application and monitor crop growth."
+        soil_messages.append(
+            "Nitrogen is relatively high. Avoid unnecessary nitrogen application."
         )
-
     else:
-        advice.append(
+        soil_messages.append(
             "Nitrogen is within the project's normal range."
         )
 
-    # --------------------------------------------------
-    # Phosphorus advice
-    # --------------------------------------------------
-
     if P < 30:
-        advice.append(
-            "Phosphorus is relatively low. Consider soil testing and "
-            "appropriate phosphorus management."
+        soil_messages.append(
+            "Phosphorus is relatively low. Consider soil testing and appropriate phosphorus management."
         )
-
     elif P > 100:
-        advice.append(
-            "Phosphorus is relatively high. Avoid unnecessary phosphorus "
-            "application."
+        soil_messages.append(
+            "Phosphorus is relatively high. Avoid unnecessary phosphorus application."
         )
-
     else:
-        advice.append(
+        soil_messages.append(
             "Phosphorus is within the project's normal range."
         )
 
-    # --------------------------------------------------
-    # Potassium advice
-    # --------------------------------------------------
-
     if K < 30:
-        advice.append(
-            "Potassium is relatively low. Consider appropriate potassium "
-            "management based on soil testing."
+        soil_messages.append(
+            "Potassium is relatively low. Consider appropriate potassium management based on soil testing."
         )
-
     elif K > 100:
-        advice.append(
-            "Potassium is relatively high. Avoid unnecessary potassium "
-            "application."
+        soil_messages.append(
+            "Potassium is relatively high. Avoid unnecessary potassium application."
         )
-
     else:
-        advice.append(
+        soil_messages.append(
             "Potassium is within the project's normal range."
         )
 
-    # --------------------------------------------------
-    # Soil pH advice
-    # --------------------------------------------------
-
     if ph < 5.5:
-        advice.append(
-            "Soil is strongly acidic according to the project's thresholds. "
-            "Consider professional soil-management guidance."
+        soil_messages.append(
+            "Soil is strongly acidic according to the project's thresholds. Consider professional soil-management guidance."
         )
-
-    elif ph < 6.0:
-        advice.append(
-            "Soil is acidic according to the project's thresholds. "
-            "Consider suitable soil-management practices."
+    elif ph < 6:
+        soil_messages.append(
+            "Soil is acidic according to the project's thresholds. Consider suitable soil-management practices."
         )
-
     elif ph <= 7.5:
-        advice.append(
+        soil_messages.append(
             "Soil pH is within the project's suitable range."
         )
-
     elif ph <= 8.5:
-        advice.append(
-            "Soil is alkaline according to the project's thresholds. "
-            "Consider appropriate soil-management practices."
+        soil_messages.append(
+            "Soil is alkaline according to the project's thresholds. Consider suitable soil-management practices."
         )
-
     else:
-        advice.append(
-            "Soil is strongly alkaline according to the project's thresholds. "
-            "Consider professional soil-management guidance."
+        soil_messages.append(
+            "Soil is strongly alkaline according to the project's thresholds. Consider professional soil-management guidance."
         )
 
-    # --------------------------------------------------
-    # Temperature advice
-    # --------------------------------------------------
+    # ==================================================
+    # WEATHER ADVICE
+    # ==================================================
+
+    weather_messages = []
 
     if temperature < 15:
-        advice.append(
-            "Temperature is relatively low according to the project's thresholds."
+        weather_messages.append(
+            "Temperature is relatively low. Monitor the crop for cold-related stress."
         )
-
     elif temperature > 30:
-        advice.append(
-            "Temperature is relatively high. Monitor crop and soil moisture "
-            "conditions carefully."
+        weather_messages.append(
+            "Temperature is relatively high. Pay close attention to crop and soil moisture."
         )
-
     else:
-        advice.append(
+        weather_messages.append(
             "Temperature is within the project's moderate range."
         )
 
-    # --------------------------------------------------
-    # Humidity advice
-    # --------------------------------------------------
-
     if humidity < 40:
-        advice.append(
+        weather_messages.append(
             "Humidity is relatively low. Monitor crop moisture conditions."
         )
-
     elif humidity > 80:
-        advice.append(
-            "Humidity is relatively high. Monitor the crop for "
-            "moisture-related issues."
+        weather_messages.append(
+            "Humidity is relatively high. Monitor the crop for moisture-related problems."
         )
-
     else:
-        advice.append(
+        weather_messages.append(
             "Humidity is within the project's moderate range."
         )
 
-    # --------------------------------------------------
-    # Rainfall advice
-    # --------------------------------------------------
-
     if rainfall < 50:
-        advice.append(
-            "Rainfall is relatively low. Monitor soil moisture and "
-            "irrigation needs."
+        weather_messages.append(
+            "Rainfall is relatively low. Monitor soil moisture and irrigation requirements."
         )
-
     elif rainfall > 200:
-        advice.append(
-            "Rainfall is relatively high. Monitor drainage and "
-            "excess-water conditions."
+        weather_messages.append(
+            "Rainfall is relatively high. Monitor drainage and excess-water conditions."
         )
-
     else:
-        advice.append(
+        weather_messages.append(
             "Rainfall is within the project's moderate range."
         )
 
+    # ==================================================
+    # IMPORTANT CONDITIONS
+    # ==================================================
+
+    warnings = []
+
+    if N < 40:
+        warnings.append(
+            "Low nitrogen may require attention before cultivation."
+        )
+
+    if P < 30:
+        warnings.append(
+            "Low phosphorus may require attention before cultivation."
+        )
+
+    if K < 30:
+        warnings.append(
+            "Low potassium may require attention before cultivation."
+        )
+
+    if ph < 5.5 or ph > 8.5:
+        warnings.append(
+            "Soil pH is outside the project's preferred range and should be evaluated carefully."
+        )
+
+    if temperature > 30:
+        warnings.append(
+            "High temperature may increase crop water requirements."
+        )
+
+    if humidity > 80:
+        warnings.append(
+            "High humidity may increase moisture-related crop risks."
+        )
+
+    if rainfall > 200:
+        warnings.append(
+            "High rainfall may increase the need for drainage."
+        )
+
+    if rainfall < 50:
+        warnings.append(
+            "Low rainfall may increase irrigation requirements."
+        )
+
+    if not warnings:
+        warnings.append(
+            "No major warning conditions were detected using the project's thresholds."
+        )
+
+    # ==================================================
+    # FINAL RESULT
+    # ==================================================
+
     return {
         "crop": crop_name,
-        "advice": advice
+
+        "crop_advice": crop_messages,
+
+        "soil_advice": soil_messages,
+
+        "weather_advice": weather_messages,
+
+        "warnings": warnings,
+
+        # Keep the original combined advice as well.
+        "advice": (
+            crop_messages
+            + soil_messages
+            + weather_messages
+            + warnings
+        )
     }
